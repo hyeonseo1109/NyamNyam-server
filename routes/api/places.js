@@ -3,7 +3,7 @@ import { pool } from "../db.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/like", async (req, res) => {
   const { userId, restaurantId } = req.body;
 
   try {
@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/", async (req, res) => {
+router.delete("/like", async (req, res) => {
   const {userId, restaurantId} = req.body;
   try {
     await pool.query(
