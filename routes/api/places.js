@@ -1,10 +1,12 @@
 import express from "express";
 import { pool } from "../../db.js";
+import authenticate from "../middlewares/authenticate.js";
 
 const router = express.Router();
 
 router.post("/like", authenticate, async (req, res) => {
   console.log("받은 바디:", req.body);
+  console.log("토큰에서 꺼낸 유저 정보:", req.user); 
   const { restaurantId } = req.body;
   const userId = req.user.sub; 
 
@@ -22,7 +24,7 @@ router.post("/like", authenticate, async (req, res) => {
   }
 });
 
-router.delete("/like", async (req, res) => {
+router.delete("/like", authenticate, async (req, res) => {
   const { restaurantId } = req.body;
   const userId = req.user.sub; 
   try {
