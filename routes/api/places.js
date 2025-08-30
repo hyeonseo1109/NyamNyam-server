@@ -4,6 +4,7 @@ import { pool } from "../db.js";
 const router = express.Router();
 
 router.post("/like", async (req, res) => {
+  console.log("받은 바디:", req.body);
   const { userId, restaurantId } = req.body;
 
   try {
