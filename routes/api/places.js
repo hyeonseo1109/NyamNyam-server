@@ -3,9 +3,10 @@ import { pool } from "../../db.js";
 
 const router = express.Router();
 
-router.post("/like", async (req, res) => {
+router.post("/like", authenticate, async (req, res) => {
   console.log("받은 바디:", req.body);
-  const { userId, restaurantId } = req.body;
+  const { restaurantId } = req.body;
+  const userId = req.user.sub; 
 
   try {
     // DB에 저장
@@ -22,7 +23,8 @@ router.post("/like", async (req, res) => {
 });
 
 router.delete("/like", async (req, res) => {
-  const {userId, restaurantId} = req.body;
+  const { restaurantId } = req.body;
+  const userId = req.user.sub; 
   try {
     await pool.query(
       "DELETE FROM Places WHERE userId = ? AND restaurantId = ?",
