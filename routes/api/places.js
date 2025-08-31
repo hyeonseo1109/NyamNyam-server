@@ -39,4 +39,18 @@ router.delete("/like", authenticate, async (req, res) => {
   }
 });
 
+router.get("/like", authenticate, async (req, res) => {
+  const userId = req.user.sub; // 토큰에서 가져온 user id
+  try {
+    const [rows] = await pool.query(
+      "SELECT * FROM Places WHERE userId = ?",
+      [userId]
+    );
+    res.json(rows); // 결과를 JSON으로 반환
+  } catch (err) {
+    console.error("찜 조회 에러:", err);
+    res.status(500).json({ message: "찜 조회 : 서버 에러" });
+  }
+});
+
 export default router;
