@@ -2,9 +2,17 @@ import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { pool } from "../db.js";
+import dotenv from "dotenv";
+dotenv.config();
+
+console.log("✅ JWT_SECRET Loaded:", process.env.JWT_SECRET);
 
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET || "dev-secret";
+if (!process.env.JWT_SECRET) {
+  throw new Error("JWT_SECRET 환경변수가 설정되지 않았습니다.");
+}
+const JWT_SECRET = process.env.JWT_SECRET;
+
 
 // 회원가입
 router.post("/register", async (req, res) => {
