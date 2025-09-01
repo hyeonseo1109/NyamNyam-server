@@ -47,7 +47,8 @@ router.get("/like", authenticate, async (req, res) => {
       "SELECT * FROM Places WHERE userId = ?",
       [userId]
     );
-    res.json(rows); // 결과를 JSON으로 반환
+    const restaurantIds = rows.map(r => r.restaurantId);
+    res.json({ restaurantIds });
   } catch (err) {
     console.error("찜 조회 에러:", err);
     res.status(500).json({ message: "찜 조회 : 서버 에러" });
