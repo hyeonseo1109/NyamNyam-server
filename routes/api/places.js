@@ -9,6 +9,7 @@ router.post("/like", authenticate, async (req, res) => {
   console.log("토큰에서 꺼낸 유저 정보:", req.user); 
   const { restaurantId } = req.body;
   const userId = req.user.sub; 
+  console.log("유저아이디:", userId);
 
   try {
     // DB에 저장
