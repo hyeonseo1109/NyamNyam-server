@@ -4,6 +4,7 @@ import cors from "cors";
 import authRouter from "./routes/auth.js";
 import placesRouter from "./routes/api/places.js";
 dotenv.config();
+console.log("✅ JWT_SECRET Loaded:", process.env.JWT_SECRET);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
