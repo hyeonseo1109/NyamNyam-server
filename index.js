@@ -8,6 +8,7 @@ console.log("✅ JWT_SECRET Loaded:", process.env.JWT_SECRET);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = "127.0.0.1";
 
 app.use(cors());
 app.use(express.json());
@@ -16,6 +17,6 @@ app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/api/places", placesRouter);
 
-app.listen(3000, "0.0.0.0", () => {
+app.listen(3000, HOST, () => {
   console.log(`server running on port ${PORT}`);
 });
