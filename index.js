@@ -10,7 +10,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const HOST = "127.0.0.1";
 
-app.use(cors());
+// CORS 모든 도메인 허용
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(express.json());
 
 // 라우터
